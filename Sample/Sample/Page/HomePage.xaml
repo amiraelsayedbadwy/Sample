@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sample.Page.HomePage"
+              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+ 
+    <ContentPage.Content>
+    <Grid RowDefinitions="auto,0.8*">
+     
+      <CollectionView
+                           Margin="20"
+                            HeightRequest="130"
+        x:Name="categorylist"
+                                ItemsSource="{Binding MyList}"
+                                SelectionMode="None">
+        <CollectionView.ItemsLayout>
+          <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+          <DataTemplate>
+
+            <pancake:PancakeView   
+                                            Grid.Row="1"
+                                            BackgroundColor="Purple"
+                                            CornerRadius="10"
+                                      
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand"
+                                            WidthRequest="140">
+              <StackLayout Margin="0,10,0,0" x:Name="categorygrid">
+                <Image 
+                                                 
+                                                
+                                                    HeightRequest="40"
+                                                   WidthRequest="70"
+                 
+                                                    Source="{Binding Image}"
+                                                   HorizontalOptions="Center" />
+                <Label
+                                                  
+                                                    FontSize="15"
+                                                    HorizontalOptions="Center"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding Name}"
+                                                    TextColor="White"
+                  VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center" />
+                <Button  Text="More"
+                         Margin="10,0,10,0"  WidthRequest="70"
+                        
+                         BackgroundColor="Transparent"
+                         BorderWidth="1"
+                         TextColor="White"
+                         BorderColor="LightGray"
+                       CornerRadius="16"
+                            Command="{Binding SelectCategoryCommand}"
+                            BindingContext="{Binding Source={x:Reference categorylist}, Path=BindingContext}" 
+                            CommandParameter="{Binding Source={x:Reference categorygrid},Path=BindingContext}"
+                        HeightRequest="34"
+                  HorizontalOptions="End"/>
+              </StackLayout>
+
+              <pancake:PancakeView.Border>
+                <pancake:Border Thickness="0" />
+              </pancake:PancakeView.Border>
+
+            </pancake:PancakeView>
+
+          </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+      </CollectionView>
+      
+    </Grid>
+  </ContentPage.Content>
+</ContentPage>
